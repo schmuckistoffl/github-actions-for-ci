@@ -16,31 +16,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - name: npm install and build webpack
-        run: |
+    - uses: actions/checkout@v2
+    - name: npm install and build webpack
+      run: |
           npm install
-        needs: build
-        uses: actions/upload-artifact@master
-        with:
-          name: webpack artifacts
-          path: public/
+    - name: build
+      uses: actions/upload-artifact@master
+      with:
+        name: webpack artifacts
+        path: public/
 
   test:
     name: npm install and test
+    needs: build
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-2016]
-   # name: npm install, and test
-    uses: actions/download-artifact@master
-    
-      with:
-        name: webpack artifacts
-        path: public
-      
+        os: [ubuntu-latest, windows-2016]  
       
     steps:
+    - name: download
+      uses: actions/download-artifact@master
+      with:
+        name: webpack artifacts
+        path: publix
+        
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
