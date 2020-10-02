@@ -16,12 +16,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: build
     - uses: actions/checkout@v2
     - name: npm install and build webpack
       run: |
           npm ci
-          npm build
+          npm run build
     - name: upload
       uses: actions/upload-artifact@master
       with:
